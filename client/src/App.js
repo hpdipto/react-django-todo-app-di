@@ -36,7 +36,6 @@ function App() {
 
 
   const handleChange = (e) => {
-    var name = e.target.name
     var value = e.target.value
 
     setActiveItem({...activeItem, title: value})
@@ -123,7 +122,7 @@ function App() {
                 <div key={index} className="task-wrapper flex-wrapper">
 
                   <div onClick={() => strikeUnstrike(task)} style={{flex: 7}}>
-                    {task.completed == false ? 
+                    {task.completed === false ? 
                       ( <span>{task.title}</span> ) :
                       ( <strike>{task.title}</strike> )
                     }

@@ -1,6 +1,7 @@
-# Django REST Framework (Dennis Ivy)
+# React + Django To-Do App | Django REST Framework
 
-This respository contains source code from Dennis Ivy's [Django Rest Framework | Serializers & CRUD](https://www.youtube.com/watch?v=TmsD8QExZ84) tutorial.
+This source code is taken from Dennis Ivy's [React + Django To-Do App | Django REST Framework](https://www.youtube.com/watch?v=W9BjUoot2Eo) tutorial.
 
+This is really a nice tutorial to learn about a full stack project with Django backend.
 
-Basic REST framework is used here with very clearance. This is really a nice tutorial.
+I highly recommend this tutorial to anyone who wanted to learn about Django with React.

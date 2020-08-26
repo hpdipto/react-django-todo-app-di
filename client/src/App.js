@@ -28,8 +28,6 @@ function App() {
 
 
   const fetchTask = () => {
-    console.log('Fetching...');
-
     axios.get('http://localhost:8000/api/task-list/')
         .then(res => {
           setTodoList(res.data)
@@ -40,15 +38,12 @@ function App() {
   const handleChange = (e) => {
     var name = e.target.name
     var value = e.target.value
-    console.log('Name:', name)
-    console.log('Value:', value)
 
     setActiveItem({...activeItem, title: value})
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('ITEM: ', activeItem)
 
     var csrfToken = getCookie('csrftoken')
 
@@ -86,6 +81,17 @@ function App() {
 
   }
 
+  const strikeUnstrike = (task) => {
+    task.completed = !task.completed;
+    const url = `http://localhost:8000/api/task-update/${task.id}/`
+    var csrfToken = getCookie('csrftoken');
+
+    axios.post(url, task, { headers: { 'X-CSRFToken': csrfToken } })
+        .then(res => {
+          fetchTask()
+        })
+  }
+
 
   useEffect(() => {
     fetchTask();
@@ -115,12 +121,18 @@ function App() {
           {todoList.map((task, index) => {
             return(
                 <div key={index} className="task-wrapper flex-wrapper">
-                  <div style={{flex: 7}}>
-                    <span>{task.title}</span>
+
+                  <div onClick={() => strikeUnstrike(task)} style={{flex: 7}}>
+                    {task.completed == false ? 
+                      ( <span>{task.title}</span> ) :
+                      ( <strike>{task.title}</strike> )
+                    }
                   </div>
+
                   <div style={{flex: 1}}>
                     <button onClick={() => startEdit(task)} className="btn btn-sm btn-outline-info">Edit</button>
                   </div>
+
                   <div style={{flex: 1}}>
                     <button onClick={() => deleteItem(task)} className="btn btn-sm btn-outline-dark delete">X</button>
                   </div>
